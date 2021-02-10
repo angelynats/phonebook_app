@@ -1,0 +1,14 @@
+.root {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../src/images/gorod.jpg);
+  height: 100vh;
+  object-fit: contain;
+}
+
+@media (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .root {
+    background-image: url(../src/images/gorod@2x.jpg);
+  }
+}
