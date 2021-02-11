@@ -1,7 +1,4 @@
-import axios from 'axios';
-import session from './interceptor';
-
-import * as sessionSelectors from './sessionSelectors';
+import apiInstance from '../../utils/apiInstance/apiInstance';
 import {
   loginRequest,
   loginSuccess,
@@ -15,23 +12,12 @@ import {
   logOut,
 } from './sessionActions';
 
-// axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
-
-// const setAuthToken = token => {
-//   axios.defaults.headers.common['Authorization'] = token;
-// };
-
-// const clearAuthToken = () => {
-//   axios.defaults.headers.common['Authorization'] = null;
-// };
-
 export const login = credentials => dispatch => {
   dispatch(loginRequest());
 
-  session
+  apiInstance
     .post('/users/login', credentials)
     .then(response => {
-      // setAuthToken(response.data.token);
       dispatch(loginSuccess(response.data));
     })
     .catch(error => {
@@ -42,10 +28,9 @@ export const login = credentials => dispatch => {
 export const signup = credentials => dispatch => {
   dispatch(signupRequest());
 
-  session
+  apiInstance
     .post('/users/signup', credentials)
     .then(response => {
-      // setAuthToken(response.data.token);
       dispatch(signupSuccess(response.data));
     })
     .catch(error => {
@@ -53,26 +38,24 @@ export const signup = credentials => dispatch => {
     });
 };
 
-export const refreshUser = () => (dispatch, getState) => {
-  const token = sessionSelectors.getToken(getState());
+export const refreshUser = () => dispatch => {
+  const token = localStorage.getItem('token');
   if (!token) {
     return;
   }
-  // setAuthToken(token);
   dispatch(refreshUserRequest());
 
-  session
+  apiInstance
     .get('/users/current')
     .then(response => {
       dispatch(refreshUserSuccess(response.data));
     })
     .catch(error => {
-      // clearAuthToken();
       dispatch(refreshUserError(error));
     });
 };
 
 export const logout = () => dispatch => {
-  // clearAuthToken();
+  localStorage.removeItem('token');
   dispatch(logOut());
 };

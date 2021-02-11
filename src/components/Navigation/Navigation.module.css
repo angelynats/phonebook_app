@@ -1,0 +1,36 @@
+.nav {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.link {
+  display: block;
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  min-width: 100px;
+  height: 34px;
+  border-radius: 25px;
+  cursor: pointer;
+  box-sizing: content-box;
+  text-align: center;
+  line-height: 34px;
+  border: 2px solid #fff;
+  background-color: transparent;
+  margin-right: 10px;
+  will-change: transform;
+  transition: transform 200ms linear;
+}
+
+.link:hover {
+  transition: transform 200ms linear;
+  transform: scale(1.1);
+}
+
+.link_activeStyle {
+  color: #fff;
+  background-color: rgba(3, 158, 62);
+}

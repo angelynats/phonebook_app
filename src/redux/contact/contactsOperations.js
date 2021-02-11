@@ -1,5 +1,4 @@
-import axios from 'axios';
-import * as contactsSelectors from './contactsSelectors';
+import apiInstance from '../../utils/apiInstance/apiInstance';
 
 import {
   fetchContactsStart,
@@ -16,19 +15,9 @@ import {
   editContactError,
 } from './contactActions';
 
-// axios.defaults.baseURL = 'http://localhost:4040';
-axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
-
-const setAuthToken = token => {
-  axios.defaults.headers.common['Authorization'] = token;
-};
-
-export const fetchContacts = () => (dispatch, getState) => {
-  const token = contactsSelectors.getToken(getState());
-  setAuthToken(token);
-
+export const fetchContacts = () => dispatch => {
   dispatch(fetchContactsStart());
-  axios
+  apiInstance
     .get('/contacts')
     .then(response => {
       dispatch(fetchContactsSuccess(response.data));
@@ -38,12 +27,9 @@ export const fetchContacts = () => (dispatch, getState) => {
     });
 };
 
-export const addContact = contact => (dispatch, getState) => {
-  const token = contactsSelectors.getToken(getState());
-  setAuthToken(token);
-
+export const addContact = contact => dispatch => {
   dispatch(addContactStart());
-  axios
+  apiInstance
     .post('/contacts', contact)
     .then(response => {
       dispatch(addContactSuccess(response.data));
@@ -53,12 +39,9 @@ export const addContact = contact => (dispatch, getState) => {
     });
 };
 
-export const deleteContact = id => (dispatch, getState) => {
-  const token = contactsSelectors.getToken(getState());
-  setAuthToken(token);
-
+export const deleteContact = id => dispatch => {
   dispatch(deleteContactStart());
-  axios
+  apiInstance
     .delete(`/contacts/${id}`)
     .then(() => {
       dispatch(deleteContactSuccess(id));
@@ -68,12 +51,9 @@ export const deleteContact = id => (dispatch, getState) => {
     });
 };
 
-export const editContact = (id, contact) => (dispatch, getState) => {
-  const token = contactsSelectors.getToken(getState());
-  setAuthToken(token);
-
+export const editContact = (id, contact) => dispatch => {
   dispatch(editContactStart());
-  axios
+  apiInstance
     .patch(`/contacts/${id}`, contact)
     .then(response => {
       dispatch(editContactSuccess(response.data));

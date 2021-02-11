@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './HomePage.module.css';
 
-import withAuthRedirect from '../../components/hoc/withAuthRedirect';
+import withAuthRedirect from '../../utils/hoc/withAuthRedirect';
 
 const HomePage = () => {
   return (

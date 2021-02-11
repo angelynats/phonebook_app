@@ -2,17 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './redux/store';
-import App from './App';
+import store from './redux/store';
+import App from './components/App/App';
+import apiInstance from './utils/apiInstance/apiInstance';
+import setInterceptorsToApiInstance from './utils/apiInstance/setInterceptorsToApiInstance';
+
+setInterceptorsToApiInstance(apiInstance);
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <HashRouter basename="/phonebook_app">
-        <Route component={App} />
-      </HashRouter>
-    </PersistGate>
+    <HashRouter basename="/phonebook_app">
+      <Route component={App} />
+    </HashRouter>
   </Provider>,
   document.getElementById('root'),
 );

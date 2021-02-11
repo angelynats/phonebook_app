@@ -31,18 +31,6 @@ const authenticatedReducer = (state = false, { type, payload }) => {
   }
 };
 
-const tokenReducer = (state = null, { type, payload }) => {
-  switch (type) {
-    case ActionTypes.LOGIN_SUCCESS:
-    case ActionTypes.SIGNUP_SUCCESS:
-      return payload.response.token;
-    case ActionTypes.LOGOUT:
-      return null;
-    default:
-      return state;
-  }
-};
-
 const errorReducer = (state = null, { type, payload }) => {
   switch (type) {
     case ActionTypes.LOGIN_ERROR:
@@ -56,7 +44,6 @@ const errorReducer = (state = null, { type, payload }) => {
 
 export default combineReducers({
   user: userReducer,
-  token: tokenReducer,
   error: errorReducer,
   authenticated: authenticatedReducer,
 });
@@ -64,7 +51,6 @@ export default combineReducers({
 // {
 //     session: {
 //         user: {},
-//         token: null,
 //         error: null,
 //     }
 // }

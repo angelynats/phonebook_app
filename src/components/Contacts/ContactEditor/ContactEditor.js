@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as contactsOperations from '../../../redux/contact/contactsOperations';
 
-// import PropTypes from 'prop-types';
+const ContactEditorEdit = ({ title, titleButton, contact, onClose }) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-const ContactEditorEdit = ({ contact, onClose }) => {
-  const [name, setName] = useState(contact.name);
+  useEffect(() => {
+    if (contact) {
+      setName(contact.name);
+      setNumber(contact.number);
+    }
+  }, [contact]);
+
   const onNameChange = e => {
     setName(e.target.value);
   };
 
-  const [number, setNumber] = useState(contact.number);
   const onNumberChange = e => {
     setNumber(e.target.value);
   };
@@ -19,13 +26,17 @@ const ContactEditorEdit = ({ contact, onClose }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    dispatch(contactsOperations.editContact(contact.id, { name, number }));
+    if (contact) {
+      dispatch(contactsOperations.editContact(contact.id, { name, number }));
+    } else {
+      dispatch(contactsOperations.addContact({ name, number }));
+    }
     onClose();
   };
 
   return (
     <>
-      <h3> Add a new contact:</h3>
+      <h3>{title}</h3>
       <form onSubmit={onSubmit}>
         <label htmlFor="name">Name</label>
         <input
@@ -48,7 +59,7 @@ const ContactEditorEdit = ({ contact, onClose }) => {
         />
 
         <hr></hr>
-        <button type="submit">Edit</button>
+        <button type="submit">{titleButton}</button>
         <button type="button" onClick={onClose}>
           Cancel
         </button>
@@ -58,3 +69,14 @@ const ContactEditorEdit = ({ contact, onClose }) => {
 };
 
 export default ContactEditorEdit;
+
+ContactEditorEdit.propTypes = {
+  onClose: PropTypes.func,
+  contact: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    number: PropTypes.string,
+  }),
+  title: PropTypes.string,
+  titleButton: PropTypes.string,
+};

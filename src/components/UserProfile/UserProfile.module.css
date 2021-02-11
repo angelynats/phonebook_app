@@ -1,0 +1,52 @@
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  color: #fff;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.name::before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-image: url(../../images/user.svg);
+  margin-right: 10px;
+}
+
+.button {
+  display: block;
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  min-width: 100px;
+  height: 34px;
+  border-radius: 25px;
+  cursor: pointer;
+  box-sizing: content-box;
+  text-align: center;
+  line-height: 34px;
+  border: 2px solid #fff;
+  background-color: transparent;
+  padding: 0;
+  margin-right: 10px;
+  will-change: transform;
+  transition-property: transform, background-color;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+
+.button:hover {
+  transition-property: transform, background-color;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  transform: scale(1.1);
+  background-color: rgb(194, 55, 55);
+}

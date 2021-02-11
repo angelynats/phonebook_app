@@ -1,32 +1,27 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+// import PropTypes from 'prop-types';
 import * as sessionOperations from '../../redux/session/sessionOperations';
+import styles from './SignupForm.module.css';
 
-class SignupForm extends Component {
-  state = { name: '', email: '', password: '' };
+const SignupForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  handleSubmit = e => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.onSignup({ ...this.state });
-    this.setState({
-      name: '',
-      email: '',
-      password: '',
-    });
+    dispatch(sessionOperations.signup({ name, email, password }));
   };
 
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  render() {
-    const { name, email, password } = this.state;
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name">Name</label>
+  return (
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.inputs}>
+        <label htmlFor="name" className={styles.label}>
+          Name
+        </label>
         <input
           required
           autoFocus
@@ -34,35 +29,39 @@ class SignupForm extends Component {
           type="text"
           name="name"
           value={name}
-          onChange={this.handleChange}
+          onChange={e => setName(e.target.value)}
+          className={styles.input}
         />
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email" className={styles.label}>
+          Email
+        </label>
         <input
           required
           id="email"
           type="email"
           name="email"
           value={email}
-          onChange={this.handleChange}
+          onChange={e => setEmail(e.target.value)}
+          className={styles.input}
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password" className={styles.label}>
+          Password
+        </label>
         <input
           required
           id="password"
           type="password"
           name="password"
           value={password}
-          onChange={this.handleChange}
+          onChange={e => setPassword(e.target.value)}
+          className={styles.input}
         />
-        <hr></hr>
-        <button type="submit">SIGN UP</button>
-      </form>
-    );
-  }
-}
-
-const mapDispatchToProps = {
-  onSignup: sessionOperations.signup,
+      </div>
+      <button type="submit" className={styles.button}>
+        SIGN UP
+      </button>
+    </form>
+  );
 };
 
-export default connect(null, mapDispatchToProps)(SignupForm);
+export default SignupForm;

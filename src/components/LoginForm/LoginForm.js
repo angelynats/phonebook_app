@@ -1,30 +1,25 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import * as sessionOperations from '../../redux/session/sessionOperations';
+import styles from './LoginForm.module.css';
 
-class LoginForm extends Component {
-  state = { email: '', password: '' };
+const LoginForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  handleSubmit = e => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.onLogin({ ...this.state });
-    this.setState({
-      email: '',
-      password: '',
-    });
+    dispatch(sessionOperations.login({ email, password }));
   };
 
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  render() {
-    const { email, password } = this.state;
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="email">Email</label>
+  return (
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.inputs}>
+        <label htmlFor="email" className={styles.label}>
+          Email
+        </label>
         <input
           required
           autoFocus
@@ -32,26 +27,27 @@ class LoginForm extends Component {
           type="email"
           name="email"
           value={email}
-          onChange={this.handleChange}
+          onChange={e => setEmail(e.target.value)}
+          className={styles.input}
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password" className={styles.label}>
+          Password
+        </label>
         <input
           required
           id="password"
           type="password"
           name="password"
           value={password}
-          onChange={this.handleChange}
+          onChange={e => setPassword(e.target.value)}
+          className={styles.input}
         />
-        <hr></hr>
-        <button type="submit">LOG IN</button>
-      </form>
-    );
-  }
-}
-
-const mapDispatchToProps = {
-  onLogin: sessionOperations.login,
+      </div>
+      <button type="submit" className={styles.button}>
+        LOG IN
+      </button>
+    </form>
+  );
 };
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default LoginForm;

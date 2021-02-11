@@ -1,26 +1,32 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as sessionSelectors from '../../redux/session/sessionSelectors';
-import * as sessionOperations from '../../redux/session/sessionOperations';
 
 import Navigation from '../Navigation/Navigation';
 import UserProfile from '../UserProfile/UserProfile';
+import styles from './AppBar.module.css';
 
 const AppBar = () => {
-  const user = useSelector(state => sessionSelectors.getUser(state));
   const authenticated = useSelector(state =>
     sessionSelectors.isAuthenticated(state),
   );
-  const dispatch = useDispatch();
-  const onLogOut = () => {
-    dispatch(sessionOperations.logout());
-  };
   return (
-    <header>
-      <Navigation authenticated={authenticated} />
-      {authenticated && <UserProfile onLogOut={onLogOut} user={user} />}
+    <header className={styles.header}>
+      <Navigation />
+      {authenticated && <UserProfile />}
     </header>
   );
 };
 
 export default AppBar;
+
+AppBar.propTypes = {
+  authenticated: PropTypes.bool,
+  user: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    number: PropTypes.string,
+  }),
+  onLogOut: PropTypes.func,
+};

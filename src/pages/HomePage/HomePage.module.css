@@ -12,13 +12,11 @@
   width: 100%;
   align-items: center;
   border-radius: 30px;
-  margin-top: 50px;
 }
 
 .header_main,
 .header_main_app {
   font-family: 'Montserrat', 'Arial', sans-serif;
-  font-weight: 700;
   color: rgb(3, 69, 107);
   font-size: 36px;
   margin: 0;
@@ -27,6 +25,7 @@
 }
 
 .header_main {
+  font-weight: 700;
   margin-bottom: 14px;
 }
 
@@ -74,6 +73,8 @@
   line-height: 34px;
   border: 2px solid #ffffff;
   margin-bottom: 10px;
+  will-change: transform;
+  transition: transform 200ms linear;
 }
 
 .link_login {
@@ -88,8 +89,8 @@
 .link_signup:hover,
 .link_login:focus,
 .link_signup:focus {
-  color: #ffffff;
-  border: 2px solid #ffffff;
+  transition: transform 200ms linear;
+  transform: scale(1.1);
 }
 
 /* .link_login:hover,

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styles from './Modal.module.css';
 
 const Modal = ({ onClose, children }) => {
@@ -37,3 +38,8 @@ const Modal = ({ onClose, children }) => {
 };
 
 export default Modal;
+
+Modal.propTypes = {
+  children: PropTypes.element.isRequired,
+  onClose: PropTypes.func,
+};

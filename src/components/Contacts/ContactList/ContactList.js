@@ -1,44 +1,50 @@
-import { React, Component } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import * as contactsOperations from '../../../redux/contact/contactsOperations';
+import * as contactsSelectors from '../../../redux/contact/contactsSelectors';
+import styles from './ContactList.module.css';
 
 import Contact from '../Contact/Contact';
-import ContactFilter from '../ContactFilter/ContactFilterConstructor';
 
-export default class ContactList extends Component {
-  componentDidMount() {
-    this.props.fetchContacts();
-  }
+const ContactList = () => {
+  const contacts = useSelector(state =>
+    contactsSelectors.getContactsWithFilter(state),
+  );
 
-  render() {
-    const { contacts } = this.props;
-    return (
-      <>
-        <h1>Contacts</h1>
-        <ContactFilter />
+  const dispatch = useDispatch();
 
-        {contacts.length > 0 && (
-          <ul>
+  useEffect(() => {
+    dispatch(contactsOperations.fetchContacts());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <>
+      {contacts.length > 0 && (
+        <>
+          <ul className={styles.list}>
             {contacts.map(contact => (
-              <li key={contact.id}>
+              <li key={contact.id} className={styles.list_item}>
                 <Contact uniqueKey={contact.id} />
               </li>
             ))}
           </ul>
-        )}
-      </>
-    );
-  }
-}
+          <p className={styles.total}>Total contacts: {contacts.length}</p>
+        </>
+      )}
+    </>
+  );
+};
 
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     }),
-//   ).isRequired,
-//   filter: PropTypes.string,
-//   onChangeFilter: PropTypes.func.isRequired,
-//   onDeleteContact: PropTypes.func.isRequired,
-// };
+export default ContactList;
+
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+};
