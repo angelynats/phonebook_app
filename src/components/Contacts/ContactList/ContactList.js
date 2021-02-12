@@ -21,6 +21,13 @@ const ContactList = () => {
 
   return (
     <>
+      {contacts.length === 0 && (
+        <div className={styles.empty}>
+          <p className={styles.empty_text}>
+            Your contact list is empty! Please, add a new contact.
+          </p>
+        </div>
+      )}
       {contacts.length > 0 && (
         <>
           <ul className={styles.list}>
@@ -46,5 +53,5 @@ ContactList.propTypes = {
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
     }).isRequired,
-  ).isRequired,
+  ),
 };

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Modal.module.css';
+import CloseIcon from '@material-ui/icons/Close';
 
 const Modal = ({ onClose, children }) => {
   const backdropRef = useRef(null);
@@ -23,13 +24,13 @@ const Modal = ({ onClose, children }) => {
 
   return (
     <div
-      className={styles.Overlay}
+      className={styles.overlay}
       ref={backdropRef}
       onClick={handleBackdropClick}
     >
-      <div className={styles.Modal}>
-        <button type="button" onClick={onClose}>
-          Close
+      <div className={styles.modal}>
+        <button type="button" onClick={onClose} className={styles.button}>
+          <CloseIcon className={styles.svg_close}></CloseIcon>
         </button>
         {children}
       </div>

@@ -29,6 +29,7 @@ export const fetchContacts = () => dispatch => {
 
 export const addContact = contact => dispatch => {
   dispatch(addContactStart());
+  console.log(contact);
   apiInstance
     .post('/contacts', contact)
     .then(response => {

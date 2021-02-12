@@ -59,5 +59,5 @@ const Navigation = () => {
 export default Navigation;
 
 Navigation.propTypes = {
-  authenticated: PropTypes.bool.isRequired,
+  authenticated: PropTypes.bool,
 };

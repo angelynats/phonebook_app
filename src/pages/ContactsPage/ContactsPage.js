@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import ContactList from '../../components/Contacts/ContactList/ContactList';
-// import ContactEditorAdd from '../../components/Contacts/ContactEditor/ContactEditorAdd';
 import ContactEditor from '../../components/Contacts/ContactEditor/ContactEditor';
 import Modal from '../../components/Modal/Modal';
 import ContactFilter from '../../components/Contacts/ContactFilter/ContactFilter';
 import styles from './ContactsPage.module.css';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const ContactsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,7 +26,9 @@ const ContactsPage = () => {
             className={styles.button}
             title="Add contact"
           >
-            +
+            <AddCircleOutlineIcon
+              className={styles.svg_add}
+            ></AddCircleOutlineIcon>
           </button>
         </div>
         <ContactList />

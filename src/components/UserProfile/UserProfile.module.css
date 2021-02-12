@@ -43,10 +43,12 @@
   transition-timing-function: linear;
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
   transition-property: transform, background-color;
   transition-duration: 200ms;
   transition-timing-function: linear;
   transform: scale(1.1);
   background-color: rgb(194, 55, 55);
+  outline: none;
 }

@@ -13,7 +13,7 @@ const HomePage = () => {
         <p className={styles.header_main_app}>Phonebook-App!</p>
         <p className={styles.header_secondary}>To start, please:</p>
         <NavLink to="/login" className={styles.link_login}>
-          LOGIN
+          LOG IN
         </NavLink>
         <p className={styles.header_secondary}>or</p>
         <NavLink to="/signup" className={styles.link_signup}>

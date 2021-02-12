@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { validateAll } from 'indicative/validator';
+import { rulesContact, messages } from '../../../utils/validation';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import { formatPhoneNumberIntl } from 'react-phone-number-input';
 import * as contactsOperations from '../../../redux/contact/contactsOperations';
+import styles from './ContactEditor.module.css';
 
-const ContactEditorEdit = ({ title, titleButton, contact, onClose }) => {
+const ContactEditor = ({ title, titleButton, contact, onClose }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const [errors, setErrors] = useState(null);
 
   useEffect(() => {
     if (contact) {
@@ -14,63 +21,93 @@ const ContactEditorEdit = ({ title, titleButton, contact, onClose }) => {
     }
   }, [contact]);
 
-  const onNameChange = e => {
-    setName(e.target.value);
-  };
-
-  const onNumberChange = e => {
-    setNumber(e.target.value);
-  };
-
   const dispatch = useDispatch();
 
   const onSubmit = e => {
     e.preventDefault();
-    if (contact) {
-      dispatch(contactsOperations.editContact(contact.id, { name, number }));
-    } else {
-      dispatch(contactsOperations.addContact({ name, number }));
-    }
-    onClose();
+    validateAll({ name, number }, rulesContact, messages)
+      .then(data => {
+        data.number = formatPhoneNumberIntl(number);
+        if (contact) {
+          dispatch(contactsOperations.editContact(contact.id, data));
+        } else {
+          dispatch(contactsOperations.addContact(data));
+        }
+        onClose();
+      })
+      .catch(errors => {
+        const formattedErrors = {};
+        errors.forEach(error => (formattedErrors[error.field] = error.message));
+        setErrors(formattedErrors);
+      });
   };
 
   return (
     <>
-      <h3>{title}</h3>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="name">Name</label>
-        <input
-          required
-          autoFocus
-          id="name"
-          type="text"
-          name="name"
-          value={name}
-          onChange={onNameChange}
-        />
-        <label htmlFor="number">Number</label>
-        <input
-          required
-          id="number"
-          type="text"
-          name="number"
-          value={number}
-          onChange={onNumberChange}
-        />
+      <h1 className={styles.title}>{title}</h1>
+      <form onSubmit={onSubmit} className={styles.form} noValidate>
+        <div className={styles.inputs}>
+          <label htmlFor="name" className={styles.label}>
+            Name
+            <input
+              autoFocus
+              id="name"
+              type="text"
+              name="name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              className={styles.input}
+            />
+            {errors && <span className={styles.error}>{errors.name}</span>}
+          </label>
+          <label htmlFor="number" className={styles.label}>
+            Number
+            <PhoneInput
+              defaultCountry="UA"
+              id="number"
+              type="text"
+              name="number"
+              placeholder="+..."
+              value={number}
+              onChange={setNumber}
+              className={styles.input}
+            />
+            {errors && <span className={styles.error}>{errors.number}</span>}
+          </label>
 
-        <hr></hr>
-        <button type="submit">{titleButton}</button>
-        <button type="button" onClick={onClose}>
-          Cancel
-        </button>
+          {/* <label htmlFor="number" className={styles.label}>
+            Number
+            <input
+              id="number"
+              type="text"
+              name="number"
+              value={number}
+              onChange={onNumberChange}
+              className={styles.input}
+            />
+            {errors && <span className={styles.error}>{errors.number}</span>}
+          </label> */}
+        </div>
+        <div className={styles.buttons}>
+          <button type="submit" className={styles.button_submit}>
+            {titleButton}
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className={styles.button_cancel}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </>
   );
 };
 
-export default ContactEditorEdit;
+export default ContactEditor;
 
-ContactEditorEdit.propTypes = {
+ContactEditor.propTypes = {
   onClose: PropTypes.func,
   contact: PropTypes.shape({
     id: PropTypes.string.isRequired,

@@ -1,0 +1,103 @@
+.title {
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  font-weight: 700;
+  color: rgb(3, 69, 107);
+  font-size: 26px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.label {
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  font-weight: 600;
+  color: rgb(3, 69, 107);
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  line-height: 1;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.input {
+  width: 96%;
+  height: 24px;
+  padding: 3px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.error {
+  position: absolute;
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  font-weight: 300;
+  color: rgb(112, 112, 112);
+  font-size: 13px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.button_submit,
+.button_cancel {
+  display: block;
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 104px;
+  height: 38px;
+  cursor: pointer;
+  box-sizing: content-box;
+  text-align: center;
+  line-height: 34px;
+  border: none;
+  border-radius: 25px;
+  background-color: rgb(3, 69, 107);
+  padding: 0;
+  will-change: transform;
+  transition-property: transform, background-color;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+
+.button_submit:hover,
+.button_submit:focus {
+  transition-property: transform, background-color;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  transform: scale(1.1);
+  background-color: rgb(3, 158, 62);
+  outline: none;
+}
+
+.button_cancel:hover,
+.button_cancel:focus {
+  transition-property: transform, background-color;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  transform: scale(1.1);
+  background-color: rgb(194, 55, 55);
+  outline: none;
+}

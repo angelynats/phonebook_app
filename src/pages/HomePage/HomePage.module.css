@@ -91,17 +91,8 @@
 .link_signup:focus {
   transition: transform 200ms linear;
   transform: scale(1.1);
+  outline: none;
 }
-
-/* .link_login:hover,
-.link_login:focus {
-  background-color: rgba(3, 69, 107, 0.8);
-}
-
-.link_signup:hover,
-.link_signup:focus {
-  background-color: rgba(3, 158, 62, 0.8);
-} */
 
 .services__header,
 .team__header {

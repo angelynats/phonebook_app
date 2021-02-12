@@ -25,9 +25,11 @@
   transition: transform 200ms linear;
 }
 
-.link:hover {
+.link:hover,
+.link:focus {
   transition: transform 200ms linear;
   transform: scale(1.1);
+  outline: none;
 }
 
 .link_activeStyle {

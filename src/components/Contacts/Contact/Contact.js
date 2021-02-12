@@ -7,6 +7,9 @@ import Modal from '../../Modal/Modal';
 import ContactEditor from '../ContactEditor/ContactEditor';
 import styles from './Contact.module.css';
 
+import CreateIcon from '@material-ui/icons/Create';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+
 const Contact = ({ uniqueKey }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onButtonClick = () => {
@@ -34,15 +37,17 @@ const Contact = ({ uniqueKey }) => {
           type="button"
           onClick={onButtonClick}
           className={styles.button_edit}
+          title="Edit"
         >
-          Edit
+          <CreateIcon className={styles.svg_edit}></CreateIcon>
         </button>
         <button
           type="button"
           onClick={() => onDeleteContact(contact.id)}
           className={styles.button_delete}
+          title="Delete"
         >
-          Delete
+          <HighlightOffIcon className={styles.svg_del}></HighlightOffIcon>
         </button>
       </div>
       {isModalOpen && (
@@ -67,7 +72,7 @@ Contact.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string,
     number: PropTypes.string,
-  }).isRequired,
+  }),
   onButtonClick: PropTypes.func,
   onDeleteContact: PropTypes.func,
 };
