@@ -1,5 +1,5 @@
 # phonebook_app
 
-### React/Redux/Thunk/Hooks/Private Routes/Code splitting/API requests/LocalStorage/Material UI
+### React/Redux/Thunk/Hooks/Private Routes/AJAX/User registration
 npm install => 
 npm start
