@@ -63,11 +63,11 @@ const ContactEditor = ({ title, titleButton, contact, onClose }) => {
           <label htmlFor="number" className={styles.label}>
             Number
             <PhoneInput
+              international
               defaultCountry="UA"
               id="number"
               type="text"
               name="number"
-              placeholder="+..."
               value={number}
               onChange={setNumber}
               className={styles.input}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // import PropTypes from 'prop-types';
@@ -6,11 +6,30 @@ import * as sessionOperations from '../../redux/session/sessionOperations';
 import ProtectedRoute from '../../utils/ProtectedRoute';
 
 import AppBar from '../AppBar/AppBar';
-import ContactsPage from '../../pages/ContactsPage/ContactsPage';
-import SignupPage from '../../pages/SignupPage/SignupPage';
-import LoginPage from '../../pages/LoginPage/LoginPage';
-import HomePage from '../../pages/HomePage/HomePage';
+import Loader from '../Loader/Loader';
 import styles from './App.module.css';
+
+const AsyncHomePage = lazy(() =>
+  import('../../pages/HomePage/HomePage' /* webpackChunkName: 'home-page' */),
+);
+
+const AsyncLoginPage = lazy(() =>
+  import(
+    '../../pages/LoginPage/LoginPage' /* webpackChunkName: 'login-page' */
+  ),
+);
+
+const AsyncSignupPage = lazy(() =>
+  import(
+    '../../pages/SignupPage/SignupPage' /* webpackChunkName: 'signup-page' */
+  ),
+);
+
+const AsyncContactsPage = lazy(() =>
+  import(
+    '../../pages/ContactsPage/ContactsPage' /* webpackChunkName: 'contacts-page' */
+  ),
+);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,21 +42,23 @@ const App = () => {
   return (
     <div className={styles.root}>
       <AppBar />
-      <Switch>
-        <Route path="/" exact>
-          <HomePage />
-        </Route>
-        <Route path="/signup">
-          <SignupPage />
-        </Route>
-        <Route path="/login">
-          <LoginPage />
-        </Route>
-        <ProtectedRoute path="/contacts" redirectTo="/login">
-          <ContactsPage />
-        </ProtectedRoute>
-        <Redirect to="/" />
-      </Switch>
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route path="/" exact>
+            <AsyncHomePage />
+          </Route>
+          <Route path="/signup">
+            <AsyncSignupPage />
+          </Route>
+          <Route path="/login">
+            <AsyncLoginPage />
+          </Route>
+          <ProtectedRoute path="/contacts" redirectTo="/login">
+            <AsyncContactsPage />
+          </ProtectedRoute>
+          <Redirect to="/" />
+        </Switch>
+      </Suspense>
     </div>
   );
 };
