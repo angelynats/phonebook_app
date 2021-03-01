@@ -11,7 +11,7 @@
     "login-page.css": "/phonebook_app/static/css/login-page.1ae7afb6.chunk.css",
     "login-page.js": "/phonebook_app/static/js/login-page.19e54793.chunk.js",
     "login-page.js.map": "/phonebook_app/static/js/login-page.19e54793.chunk.js.map",
-    "main.css": "/phonebook_app/static/css/main.6e3fe80e.chunk.css",
+    "main.css": "/phonebook_app/static/css/main.63a108d7.chunk.css",
     "main.js": "/phonebook_app/static/js/main.484e24c0.chunk.js",
     "main.js.map": "/phonebook_app/static/js/main.484e24c0.chunk.js.map",
     "runtime-main.js": "/phonebook_app/static/js/runtime-main.d05e592d.js",
@@ -29,7 +29,7 @@
     "static/css/contacts-page.431e2f03.chunk.css.map": "/phonebook_app/static/css/contacts-page.431e2f03.chunk.css.map",
     "static/css/home-page.f03ab51d.chunk.css.map": "/phonebook_app/static/css/home-page.f03ab51d.chunk.css.map",
     "static/css/login-page.1ae7afb6.chunk.css.map": "/phonebook_app/static/css/login-page.1ae7afb6.chunk.css.map",
-    "static/css/main.6e3fe80e.chunk.css.map": "/phonebook_app/static/css/main.6e3fe80e.chunk.css.map",
+    "static/css/main.63a108d7.chunk.css.map": "/phonebook_app/static/css/main.63a108d7.chunk.css.map",
     "static/css/signup-page.fcc4689a.chunk.css.map": "/phonebook_app/static/css/signup-page.fcc4689a.chunk.css.map",
     "static/js/0.26fa6c0d.chunk.js.LICENSE.txt": "/phonebook_app/static/js/0.26fa6c0d.chunk.js.LICENSE.txt",
     "static/js/7.2499d9a6.chunk.js.LICENSE.txt": "/phonebook_app/static/js/7.2499d9a6.chunk.js.LICENSE.txt",
@@ -40,7 +40,7 @@
   "entrypoints": [
     "static/js/runtime-main.d05e592d.js",
     "static/js/7.2499d9a6.chunk.js",
-    "static/css/main.6e3fe80e.chunk.css",
+    "static/css/main.63a108d7.chunk.css",
     "static/js/main.484e24c0.chunk.js"
   ]
 }
