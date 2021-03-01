@@ -4,7 +4,7 @@
   background-size: cover;
   background-attachment: fixed;
   background-image: url(../../images/gorod.jpg);
-  height: 100%;
+  min-height: 100vh;
   object-fit: contain;
 }
 

@@ -9,7 +9,7 @@ import styles from './ContactList.module.css';
 import Contact from '../Contact/Contact';
 
 const ContactList = () => {
-  const [list, setList] = useState(false);
+  const [list, setList] = useState(true);
 
   const contactsWithFilter = useSelector(state =>
     contactsSelectors.getContactsWithFilter(state),
