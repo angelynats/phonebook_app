@@ -28,37 +28,41 @@ const Contact = ({ uniqueKey }) => {
 
   return (
     <>
-      <div className={styles.contacts}>
-        <p className={styles.contact_name}>{contact.name}</p>
-        <p className={styles.contact_number}> {contact.number}</p>
-      </div>
-      <div className={styles.buttons}>
-        <button
-          type="button"
-          onClick={onButtonClick}
-          className={styles.button_edit}
-          title="Edit"
-        >
-          <CreateIcon className={styles.svg_edit}></CreateIcon>
-        </button>
-        <button
-          type="button"
-          onClick={() => onDeleteContact(contact.id)}
-          className={styles.button_delete}
-          title="Delete"
-        >
-          <HighlightOffIcon className={styles.svg_del}></HighlightOffIcon>
-        </button>
-      </div>
-      {isModalOpen && (
-        <Modal onClose={onButtonClick}>
-          <ContactEditor
-            onClose={onButtonClick}
-            contact={contact}
-            titleButton="Edit"
-            title="Edit contact"
-          />
-        </Modal>
+      {contact && (
+        <>
+          <div className={styles.contacts}>
+            <p className={styles.contact_name}>{contact.name}</p>
+            <p className={styles.contact_number}>{contact.number}</p>
+          </div>
+          <div className={styles.buttons}>
+            <button
+              type="button"
+              onClick={onButtonClick}
+              className={styles.button_edit}
+              title="Edit"
+            >
+              <CreateIcon className={styles.svg_edit}></CreateIcon>
+            </button>
+            <button
+              type="button"
+              onClick={() => onDeleteContact(contact.id)}
+              className={styles.button_delete}
+              title="Delete"
+            >
+              <HighlightOffIcon className={styles.svg_del}></HighlightOffIcon>
+            </button>
+          </div>
+          {isModalOpen && (
+            <Modal onClose={onButtonClick}>
+              <ContactEditor
+                onClose={onButtonClick}
+                contact={contact}
+                titleButton="Edit"
+                title="Edit contact"
+              />
+            </Modal>
+          )}
+        </>
       )}
     </>
   );

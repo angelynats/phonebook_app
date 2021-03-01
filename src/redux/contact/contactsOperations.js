@@ -29,7 +29,6 @@ export const fetchContacts = () => dispatch => {
 
 export const addContact = contact => dispatch => {
   dispatch(addContactStart());
-  console.log(contact);
   apiInstance
     .post('/contacts', contact)
     .then(response => {
@@ -48,6 +47,7 @@ export const deleteContact = id => dispatch => {
       dispatch(deleteContactSuccess(id));
     })
     .catch(error => {
+      console.log(error);
       dispatch(deleteContactError(error));
     });
 };

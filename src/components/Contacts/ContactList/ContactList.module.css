@@ -8,12 +8,10 @@
   margin: 0;
   padding: 0;
   padding-left: 10px;
+  box-sizing: border-box;
 }
 
 .empty:before {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -74,4 +72,13 @@
   line-height: 1;
   align-self: start;
   margin-left: 10px;
+}
+
+.example-appear {
+  opacity: 0.01;
+  transition: opacity 0.5s ease-in;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
 }
